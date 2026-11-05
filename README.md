@@ -152,3 +152,11 @@ extension use `--autofill` option. This approach allows you to forget about capt
 ```bash
 $ python grab_me.py --autofill
 ```
+
+
+Tests
+-----
+
+Run the offline tests with `CITA_TEST=1 python test.py`. The browser integration
+test accesses the appointment website and is skipped unless `CITA_LIVE_TEST=1`
+is set; it is not run by GitHub Actions.
