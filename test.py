@@ -15,6 +15,24 @@ from bcncita import (
 
 
 class TestBot(unittest.TestCase):
+    def test_customer_profile_defaults(self):
+        customer = CustomerProfile(
+            name="Test User",
+            doc_type=DocType.PASSPORT,
+            doc_value="TEST123",
+            phone="600000000",
+            email="test@example.com",
+        )
+
+        self.assertEqual(customer.province, Province.BARCELONA)
+        self.assertEqual(customer.operation_code, OperationType.TOMA_HUELLAS)
+        self.assertTrue(customer.auto_captcha)
+        self.assertTrue(customer.auto_office)
+
+    @unittest.skipUnless(
+        os.environ.get("CITA_LIVE_TEST"),
+        "requires access to the appointment website",
+    )
     def test_cita(self):
         params = {
             "chrome_driver_path": "chromedriver",
